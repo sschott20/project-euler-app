@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import BreadcrumbItem from "react-bootstrap/BreadcrumbItem";
 
 class Factors extends Component {
