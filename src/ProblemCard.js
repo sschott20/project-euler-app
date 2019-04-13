@@ -8,11 +8,8 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Holder from "react-holder";
 
 class ProblemCard extends Component {
-  constructor(props) {
-    super(props);
-  }
   handleClick() {
-    this.props.onClick(this.props.title);
+    this.props.onClick(this.props.title, this.props.solution);
     return;
   }
   render() {
@@ -22,7 +19,7 @@ class ProblemCard extends Component {
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>{this.props.text}</Card.Text>
           <Button onClick={() => this.handleClick()} variant="primary">
-            View Solution
+            View Problem
           </Button>
         </Card.Body>
       </Card>

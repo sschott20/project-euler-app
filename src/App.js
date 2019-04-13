@@ -19,22 +19,25 @@ class App extends Component {
       displayTitle: ""
     };
   }
-  changeDisplay(title) {
+  changeDisplay(title, text) {
     this.setState(prevState => ({
-      cards: !prevState.cards
+      cards: !prevState.cards,
+      displayTitle: title,
+      displayText: text
     }));
-    this.state = {
-      displayTitle: title
-    };
-    console.log(this.state.displayTitle);
   }
   render() {
-    this.cardsInstance = <CardGroup onClick={i => this.changeDisplay(i)} />;
+    this.cardsInstance = (
+      <CardGroup onClick={(i, e) => this.changeDisplay(i, e)} />
+    );
     this.displayInstance = (
-      <Display
-        displayTitle={this.state.displayTitle}
-        onClick={i => this.changeDisplay(i)}
-      />
+      <div class="main-display">
+        <Display
+          displayTitle={this.state.displayTitle}
+          displayText={this.state.displayText}
+          onClick={() => this.changeDisplay()}
+        />
+      </div>
     );
     console.log(this.state.displayTitle);
     return (
