@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import CardDeck from "react-bootstrap/CardDeck";
-import CardColumns from "react-bootstrap/CardColumns";
-import ListGroup from "react-bootstrap/ListGroup";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
-import Holder from "react-holder";
 
 class ProblemCard extends Component {
   handleClick() {
-    this.props.onClick(this.props.title, this.props.solution);
-    return;
+    this.props.onClick(
+      this.props.title,
+      this.props.problem,
+      this.props.solution
+    );
   }
   render() {
     return (
@@ -18,7 +16,7 @@ class ProblemCard extends Component {
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>{this.props.text}</Card.Text>
-          <Button onClick={() => this.handleClick()} variant="primary">
+          <Button onClick={() => this.handleClick()} variant="outline-primary">
             View Problem
           </Button>
         </Card.Body>

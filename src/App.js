@@ -1,41 +1,49 @@
 import React, { Component } from "react";
 import "./App.css";
 import "./Factors.js";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import BreadcrumbItem from "react-bootstrap/BreadcrumbItem";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import ProblemCard from "./ProblemCard";
 import CardGroup from "./CardGroup";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Button from "react-bootstrap/Button";
+
 import Display from "./Display";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cards: true,
-      displayText: "",
-      displayTitle: ""
+      displaySolution: "",
+      displayTitle: "",
+      displayProblem: "",
+      showProblem: true
     };
   }
-  changeDisplay(title, text) {
+  changeDisplay(title, problem, solution) {
     this.setState(prevState => ({
       cards: !prevState.cards,
       displayTitle: title,
-      displayText: text
+      displayProblem: problem,
+      displaySolution: solution
     }));
   }
+  showSolution() {
+    this.setState(prevState => ({
+      showProblem: !prevState.showProblem
+    }));
+  }
+  //   hejl
   render() {
     this.cardsInstance = (
-      <CardGroup onClick={(i, e) => this.changeDisplay(i, e)} />
+      <CardGroup onClick={(i, e, o) => this.changeDisplay(i, e, o)} />
     );
     this.displayInstance = (
       <div class="main-display">
         <Display
           displayTitle={this.state.displayTitle}
-          displayText={this.state.displayText}
+          displayProblem={this.state.displayProblem}
+          displaySolution={this.state.displaySolution}
+          showProblem={this.state.showProblem}
           onClick={() => this.changeDisplay()}
+          showSolution={() => this.showSolution()}
         />
       </div>
     );
