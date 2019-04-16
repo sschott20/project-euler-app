@@ -20,21 +20,24 @@ class CardGroup extends Component {
   lychrelSolve(target) {
     let reverse;
     let sum;
+    let lychrel = [];
     for (let i = 0; i < target; i++) {
       sum = i;
-      for (let n = 0; n < 1; n++) {
-        reverse = Number.parseInt(
-          i
-            .toString()
-            .split("")
-            .reverse()
-            .join("")
-        );
-        sum = i + reverse;
-        // if (sum)
-        console.log(i, reverse, sum);
+      for (let n = 0; n < 50; n++) {
+        reverse = this.reverse(sum);
+        sum += reverse;
+        // console.log(i, reverse, sum, n);
+        if (sum === this.reverse(sum)) {
+          //   console.log("PALLENDROME: ");
+          break;
+        } else if (n === 49) {
+          lychrel.push(i);
+
+          console.log("Lyrchrel: ", i);
+        }
       }
     }
+    console.log(lychrel, lychrel.length);
     return;
   }
   render() {
@@ -78,7 +81,8 @@ class CardGroup extends Component {
         </p>
       </div>
     );
-    this.lychrelSolution = <div>{this.lychrelSolve(20)}</div>;
+    this.lychrelSolution = <div>{this.lychrelSolve(10000)}</div>;
+
     return (
       <div id="card-columns">
         <CardColumns>
