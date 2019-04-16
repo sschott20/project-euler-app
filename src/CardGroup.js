@@ -8,21 +8,52 @@ class CardGroup extends Component {
   handleClick(title, problem, solution) {
     this.props.onClick(title, problem, solution);
   }
+  reverse(num) {
+    return Number.parseInt(
+      num
+        .toString()
+        .split("")
+        .reverse()
+        .join("")
+    );
+  }
+  lychrelSolve(target) {
+    let reverse;
+    let sum;
+    for (let i = 0; i < target; i++) {
+      sum = i;
+      for (let n = 0; n < 1; n++) {
+        reverse = Number.parseInt(
+          i
+            .toString()
+            .split("")
+            .reverse()
+            .join("")
+        );
+        sum = i + reverse;
+        // if (sum)
+        console.log(i, reverse, sum);
+      }
+    }
+    return;
+  }
   render() {
     this.lychrelProblem = (
       <div>
         <p>
           If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
           <br />
+          <br />
           Not all numbers produce palindromes so quickly. For example,
           <br />
-          349 + 943 = 1292,
+          &emsp;&emsp;349 + 943 = 1292,
           <br />
-          1292 + 2921 = 4213
+          &emsp;&emsp;1292 + 2921 = 4213
           <br />
-          4213 + 3124 = 7337
+          &emsp;&emsp;4213 + 3124 = 7337
           <br />
           That is, 349 took three iterations to arrive at a palindrome.
+          <br />
           <br />
           Although no one has proved it yet, it is thought that some numbers,
           like 196, never produce a palindrome. A number that never forms a
@@ -37,34 +68,17 @@ class CardGroup extends Component {
           iterations before producing a palindrome: 4668731596684224866951378664
           (53 iterations, 28-digits).
           <br />
+          <br />
           Surprisingly, there are palindromic numbers that are themselves
           Lychrel numbers; the first example is 4994.
           <br />
+          <br />
           How many Lychrel numbers are there below ten-thousand?
           <br />
-          NOTE: Wording was modified slightly on 24 April 2007 to emphasise the
-          theoretical nature of Lychrel numbers.
-          <br />
         </p>
       </div>
     );
-    this.lychrelSolution = (
-      <div>
-        <p>
-          If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
-          <br /> <br />
-          Not all numbers produce palindromes so quickly. For example,
-          <br />
-          &emsp;&emsp;349 + 943 = 1292,
-          <br />
-          &emsp;&emsp;1292 + 2921 = 4213
-          <br />
-          &emsp;&emsp;4213 + 3124 = 7337
-          <br />
-          That chrel numbers are there below ten-thousand
-        </p>
-      </div>
-    );
+    this.lychrelSolution = <div>{this.lychrelSolve(20)}</div>;
     return (
       <div id="card-columns">
         <CardColumns>
