@@ -1,12 +1,25 @@
 import React, { Component } from "react";
-
 import CardColumns from "react-bootstrap/CardColumns";
-
 import ProblemCard from "./ProblemCard";
-
+import Prism from "prismjs";
+import "./prism.css";
+import "./CardGroup.css";
 class CardGroup extends Component {
+  componentDidMount() {
+    Prism.highlightAll();
+    console.log("highlight");
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      lychrelNumbers: ""
+    };
+  }
   handleClick(title, problem, solution) {
     this.props.onClick(title, problem, solution);
+  }
+  changeLychrelInput(event) {
+    this.setState({ lychrelNumbers: event.target.value });
   }
   reverse(num) {
     return Number.parseInt(
@@ -26,19 +39,14 @@ class CardGroup extends Component {
       for (let n = 0; n < 50; n++) {
         reverse = this.reverse(sum);
         sum += reverse;
-        // console.log(i, reverse, sum, n);
         if (sum === this.reverse(sum)) {
-          //   console.log("PALLENDROME: ");
           break;
         } else if (n === 49) {
           lychrel.push(i);
-
-          console.log("Lyrchrel: ", i);
         }
       }
     }
-    console.log(lychrel, lychrel.length);
-    return;
+    return lychrel.length;
   }
   render() {
     this.lychrelProblem = (
@@ -81,7 +89,96 @@ class CardGroup extends Component {
         </p>
       </div>
     );
-    this.lychrelSolution = <div>{this.lychrelSolve(10000)}</div>;
+    this.lychrelSolution = (
+      <div style={{ padding: "0 , 10vw" }}>
+        <p className="mainText">
+          We start with two for loops that form the basis of the algorithim. One
+          will search every number from 0 to the target, and the other one will
+          check every number to see if it is a lychrel
+        </p>
+        <pre>
+          <code className="language-javascript">
+            {`
+			lychrelSolve(target) {
+				for (let i = 0; i < target; i ++) {
+					for(let n = 0; n < 50; n++) {
+						//check for Lychrel
+					}
+				}
+			}
+			`}
+          </code>
+        </pre>
+        <br />
+        <p>
+          We need to add a way to get the palendrome of a number, so we will
+          write a function which takes an integer as input and returns the
+          palendrom. Javascript has no built in methods to reverse the order of
+          characters in an integer, but we can get around this by first turning
+          it into a string, then reversing it, then putting it back together
+        </p>
+        <pre>
+          <code className="language-javascript">
+            {`
+			reverse(int) {
+				return Number.parseInt(
+					int
+						.toString()
+						.split("")
+						.reverse()
+						.join("")
+				);
+			}
+			lychrelSolve(target) {
+				for (let i = 0; i < target; i ++) {
+					for(let n = 0; n < 50; n++) {
+						//check for Lychrel
+					}
+				}
+			}
+			`}
+          </code>
+        </pre>
+        <br />
+        <p>
+          Now all we have to do is add the number to its palendrom and see if it
+          becomes a palendrom itself. If it gets to the 50th iteration, as
+          stated in the problem we can assume Lychrelness, and add it to our
+          count
+        </p>
+        <pre>
+          <code className="language-javascript">
+            {`
+			reverse(int) {
+				return Number.parseInt(
+					int
+						.toString()
+						.split("")
+						.reverse()
+						.join("")
+				);
+			}
+			lychrelSolve(target) {
+				let reverse;
+				let sum;
+				let count = 0;
+				for (let i = 0; i < target; i ++) {
+					sum = i;
+					for(let n = 0; n < 50; n++) {
+						if (sum === reverse(sum)){
+							break;
+						} else if (n === 49) {
+							count += 1;
+						}
+					}
+				}
+				return count;
+			}
+			`}
+          </code>
+        </pre>
+      </div>
+    );
 
     return (
       <div id="card-columns">

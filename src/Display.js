@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-
+import Prism from "prismjs";
+import Col from "react-bootstrap/Col";
+import "./prism.css";
+import Row from "react-bootstrap/Row";
 class Display extends Component {
+  componentDidMount() {
+    Prism.highlightAll();
+    console.log("highlight");
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -21,17 +28,28 @@ class Display extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1>{this.props.displayTitle}</h1>
+          <Row>
+            <Col xs={5}>
+              <h1>{this.props.displayTitle}</h1>
+            </Col>
+            <Col>
+              <Button
+                style={{ marginTop: ".5em" }}
+                onClick={this.props.onClick}
+              >
+                Go back
+              </Button>
+            </Col>
+          </Row>
         </Jumbotron>
         <Jumbotron fluid>
           <Container style={{ height: "60%" }}>
-            <p style={{ textAlign: "left" }}>{this.body}</p>
+            <div style={{ textAlign: "left" }}>{this.body}</div>
           </Container>
           <Button variant="outline-primary" onClick={this.props.showSolution}>
             {this.buttonName}
           </Button>
         </Jumbotron>
-        <Button onClick={this.props.onClick}>Go back</Button>
       </div>
     );
   }

@@ -4,9 +4,14 @@ import "./Factors.js";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import CardGroup from "./CardGroup";
+import "./prism.css";
+import Prism from "prismjs";
 
 import Display from "./Display";
 class App extends Component {
+  componentDidUpdate() {
+    Prism.highlightAll();
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +30,11 @@ class App extends Component {
       displaySolution: solution
     }));
   }
+  showGallery() {
+    this.state = {
+      cards: true
+    };
+  }
   showSolution() {
     this.setState(prevState => ({
       showProblem: !prevState.showProblem
@@ -36,7 +46,7 @@ class App extends Component {
       <CardGroup onClick={(i, e, o) => this.changeDisplay(i, e, o)} />
     );
     this.displayInstance = (
-      <div class="main-display">
+      <div style={{ padding: "5%" }}>
         <Display
           displayTitle={this.state.displayTitle}
           displayProblem={this.state.displayProblem}
@@ -47,11 +57,9 @@ class App extends Component {
         />
       </div>
     );
-    console.log(this.state.displayTitle);
     return (
       <div className="App">
         <MainNav />
-
         <header className="App-header">
           {this.state.cards ? this.cardsInstance : this.displayInstance}
         </header>
@@ -71,7 +79,7 @@ class MainNav extends Component {
               <Nav.Link href="https://projecteuler.net/archives">
                 Archievs
               </Nav.Link>
-              <Nav.Link href="#link">About</Nav.Link>
+              <Nav.Link>About</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
