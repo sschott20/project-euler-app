@@ -30,24 +30,22 @@ class CardGroup extends Component {
         .join("")
     );
   }
-  lychrelSolve(target) {
-    let reverse;
-    let sum;
-    let lychrel = [];
-    for (let i = 0; i < target; i++) {
-      sum = i;
-      for (let n = 0; n < 50; n++) {
-        reverse = this.reverse(sum);
-        sum += reverse;
-        if (sum === this.reverse(sum)) {
-          break;
-        } else if (n === 49) {
-          lychrel.push(i);
-        }
-      }
+  solution() {
+    let polynomialX = x => {
+      return [-79 - 2 * x, 1601 + 79 * x + Math.pow(x, 2)];
+    };
+
+    let lastAB = [];
+
+    for (let i = -50; i < 0; i++) {
+      var [a, b] = polynomialX(i);
+      if (b > 1000 || b < -1000 || a > 1000 || a < -1000) break;
+      lastAB = [a, b];
     }
-    return lychrel.length;
+
+    return lastAB[0] * lastAB[1];
   }
+
   render() {
     this.lychrelProblem = (
       <div>
@@ -179,7 +177,60 @@ class CardGroup extends Component {
         </pre>
       </div>
     );
+    this.quadraticPrimesProblem = (
+      <div>
+        Euler discovered the remarkable quadratic formula:
+        <br />
+        <br />
+        &emsp;&emsp; n<sup>2</sup>+n+41 <br />
+        <br />
+        It turns out that the formula will produce 40 primes for the consecutive
+        integer values 0≤n≤39. However, when n=40,40<sup>2</sup>
+        +40+41=40(40+1)+41 is divisible by 41, and certainly when n=41,412+41+41
+        is clearly divisible by 41.
+        <br /> <br />
+        The incredible formula n<sup>2</sup>−79n+1601 was discovered, which
+        produces 80 primes for the consecutive values 0≤n≤79. The product of the
+        coefficients, −79 and 1601, is −126479. <br />
+        <br />
+        Considering quadratics of the form:
+        <br /> <br />
+        &emsp;&emsp;n<sup>2</sup>+an+b, where |a| &lt; 1000 and |b| &ge; 1000
+        <br />
+        <br />
+        &emsp;&emsp; where |n| is the modulus/absolute value of n<br />
+        &emsp;&emsp; e.g. |11|=11 and |−4|=4 <br />
+        <br />
+        Find the product of the coefficients, a and b, for the quadratic
+        expression that produces the maximum number of primes for consecutive
+        values of n, starting with n=0.
+      </div>
+    );
+    this.quadraticPrimesSolution = (
+      <div>
+        <pre>
+          <code className="language-javascript">
+            {`
+			function solution() {
+				let polynomialX = (x) => {
+					return [-79 - 2 * x, 1601 + 79 * x + Math.pow(x, 2)];
+				};
 
+				let lastAB = [];
+
+				for (let i = -50; i < 0; i++) {
+					var [a, b] = polynomialX(i);
+					if (b > 1000 || b < -1000 || a > 1000 || a < -1000) break;
+					lastAB = [a, b];
+				}
+
+				return lastAB[0] * lastAB[1];
+			}
+		`}
+          </code>
+        </pre>
+      </div>
+    );
     return (
       <div id="card-columns">
         <CardColumns>
@@ -189,18 +240,26 @@ class CardGroup extends Component {
             onClick={(i, e, o) => this.handleClick(i, e, o)}
             problem={this.lychrelProblem}
             solution={this.lychrelSolution}
+            problemNumber="55"
+            difficulty="5%"
           />
           <ProblemCard
-            title="Discrete Primes"
-            text="Some quick example text to build on the card title and make up the bulk of the card's content?"
-            onClick={(i, e) => this.handleClick(i, e)}
-            problem={this.lychrelProblem}
+            title="Quadratic primes"
+            text="Find a quadratic which produces the maximum number of primes for consecutive inputs"
+            onClick={(i, e, o) => this.handleClick(i, e, o)}
+            problem={this.quadraticPrimesProblem}
+            solution={this.quadraticPrimesSolution}
+            problemNumber="27"
+            difficulty="5%"
           />
           <ProblemCard
             title="Prime Factorization"
             text="What is the minimum number of tries it takes to factor a given number?"
-            onClick={(i, e) => this.handleClick(i, e)}
-            problem={this.lychrelProblem}
+            onClick={(i, e, o) => this.handleClick(i, e, o)}
+            problem={this.quadraticPrimesProblem}
+            solution={this.quadraticPrimesSolution}
+            problemNumber="27"
+            difficulty="5%"
           />
         </CardColumns>
       </div>
