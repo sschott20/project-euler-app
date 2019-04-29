@@ -21,30 +21,6 @@ class CardGroup extends Component {
   changeLychrelInput(event) {
     this.setState({ lychrelNumbers: event.target.value });
   }
-  reverse(num) {
-    return Number.parseInt(
-      num
-        .toString()
-        .split("")
-        .reverse()
-        .join("")
-    );
-  }
-  solution() {
-    let polynomialX = x => {
-      return [-79 - 2 * x, 1601 + 79 * x + Math.pow(x, 2)];
-    };
-
-    let lastAB = [];
-
-    for (let i = -50; i < 0; i++) {
-      var [a, b] = polynomialX(i);
-      if (b > 1000 || b < -1000 || a > 1000 || a < -1000) break;
-      lastAB = [a, b];
-    }
-
-    return lastAB[0] * lastAB[1];
-  }
 
   render() {
     this.lychrelProblem = (
@@ -55,11 +31,11 @@ class CardGroup extends Component {
           <br />
           Not all numbers produce palindromes so quickly. For example,
           <br />
-          &emsp;&emsp;349 + 943 = 1292,
+          &emsp;&emsp;&emsp;&emsp;349 + 943 = 1292,
           <br />
-          &emsp;&emsp;1292 + 2921 = 4213
+          &emsp;&emsp;&emsp;&emsp;1292 + 2921 = 4213
           <br />
-          &emsp;&emsp;4213 + 3124 = 7337
+          &emsp;&emsp;&emsp;&emsp;4213 + 3124 = 7337
           <br />
           That is, 349 took three iterations to arrive at a palindrome.
           <br />
@@ -97,7 +73,7 @@ class CardGroup extends Component {
         <pre>
           <code className="language-javascript">
             {`
-			lychrelSolve(target) {
+			function lychrelSolve(target) {
 				for (let i = 0; i < target; i ++) {
 					for(let n = 0; n < 50; n++) {
 						//check for Lychrel
@@ -118,7 +94,7 @@ class CardGroup extends Component {
         <pre>
           <code className="language-javascript">
             {`
-			reverse(int) {
+			function reverse(int) {
 				return Number.parseInt(
 					int
 						.toString()
@@ -127,7 +103,7 @@ class CardGroup extends Component {
 						.join("")
 				);
 			}
-			lychrelSolve(target) {
+			function lychrelSolve(target) {
 				for (let i = 0; i < target; i ++) {
 					for(let n = 0; n < 50; n++) {
 						//check for Lychrel
@@ -147,7 +123,7 @@ class CardGroup extends Component {
         <pre>
           <code className="language-javascript">
             {`
-			reverse(int) {
+			function reverse(int) {
 				return Number.parseInt(
 					int
 						.toString()
@@ -156,7 +132,7 @@ class CardGroup extends Component {
 						.join("")
 				);
 			}
-			lychrelSolve(target) {
+			function lychrelSolve(target) {
 				let reverse;
 				let sum;
 				let count = 0;
@@ -182,28 +158,34 @@ class CardGroup extends Component {
         Euler discovered the remarkable quadratic formula:
         <br />
         <br />
-        &emsp;&emsp; n<sup>2</sup>+n+41 <br />
+        &emsp;&emsp;&emsp;&emsp; <i>n</i>
+        <sup>2</sup> + <i>n</i> + 41 <br />
         <br />
         It turns out that the formula will produce 40 primes for the consecutive
-        integer values 0≤n≤39. However, when n=40,40<sup>2</sup>
-        +40+41=40(40+1)+41 is divisible by 41, and certainly when n=41,412+41+41
-        is clearly divisible by 41.
+        integer values 0 ≤ <i>n</i> ≤ 39. However, when <i>n</i> = 40, 40
+        <sup>2</sup>+ 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and
+        certainly when <i>n</i>
+        = 41, 412 + 41 + 41 is clearly divisible by 41.
         <br /> <br />
-        The incredible formula n<sup>2</sup>−79n+1601 was discovered, which
-        produces 80 primes for the consecutive values 0≤n≤79. The product of the
+        The incredible formula <i>n</i>
+        <sup>2</sup> − 79<i>n</i> + 1601 was discovered, which produces 80
+        primes for the consecutive values 0 ≤ <i>n</i> ≤ 79. The product of the
         coefficients, −79 and 1601, is −126479. <br />
         <br />
         Considering quadratics of the form:
         <br /> <br />
-        &emsp;&emsp;n<sup>2</sup>+an+b, where |a| &lt; 1000 and |b| &ge; 1000
+        &emsp;&emsp;&emsp;&emsp;n<sup>2</sup> + <i>an</i> + <i>b</i>, where |
+        <i>a</i>| &lt; 1000 and |<i>b</i>| &ge; 1000
         <br />
         <br />
-        &emsp;&emsp; where |n| is the modulus/absolute value of n<br />
-        &emsp;&emsp; e.g. |11|=11 and |−4|=4 <br />
+        &emsp;&emsp;&emsp;&emsp; where |<i>n</i>| is the modulus/absolute value
+        of <i>n</i>
         <br />
-        Find the product of the coefficients, a and b, for the quadratic
-        expression that produces the maximum number of primes for consecutive
-        values of n, starting with n=0.
+        &emsp;&emsp;&emsp;&emsp; e.g. |11| = 11 and |−4| = 4 <br />
+        <br />
+        Find the product of the coefficients, <i>a</i> and <i>b</i>, for the
+        quadratic expression that produces the maximum number of primes for
+        consecutive values of <i>n</i>, starting with <i>n</i> = 0.
       </div>
     );
     this.quadraticPrimesSolution = (
@@ -231,6 +213,68 @@ class CardGroup extends Component {
         </pre>
       </div>
     );
+    this.pandigitalMultiplesProblem = (
+      <p>
+        Take the number 192 and multiply it by each of 1, 2, and 3:
+        <br />
+        <br />
+        &emsp;&emsp;&emsp;&emsp;192 × 1 = 192
+        <br />
+        &emsp;&emsp;&emsp;&emsp;192 × 2 = 384
+        <br />
+        &emsp;&emsp;&emsp;&emsp;192 × 3 = 576
+        <br />
+        <br />
+        By concatenating each product we get the 1 to 9 pandigital, 192384576.
+        We will call 192384576 the concatenated product of 192 and (1,2,3)
+        <br />
+        <br />
+        The same can be achieved by starting with 9 and multiplying by 1, 2, 3,
+        4, and 5, giving the pandigital, 918273645, which is the concatenated
+        product of 9 and (1, 2, 3, 4, 5).
+        <br />
+        <br />
+        What is the largest 1 to 9 pandigital 9-digit number that can be formed
+        as the concatenated product of an integer with (1, 2, ... , <i>n</i>)
+        where <i>n</i> > 1?
+      </p>
+    );
+
+    this.pandigitalMultiplesSolution = (
+      <pre>
+        <code className="language-javascript">
+          {`
+			fucntion isPandigital (str) {
+				return 
+				str.includes("1") && 
+				str.includes("2") && 
+				str.includes("3") && 
+				str.includes("4") && 
+				str.includes("5") && 
+				str.includes("6") && 
+				str.includes("7") && 
+				str.includes("8") && 
+				str.includes("9")
+			}
+
+			function task () {
+				let currentLargest = 0;
+				// largest must start with a 9
+				// but can't be more than 5 digits (n>1)
+				// so i should probably start with a 9
+				// but doing that means n must be 2 (maybe?)
+				// so start at 9999 and go until 9000
+				for (let i = 9999; i > 9000; i--) {
+					panTest = i.toString() + (i*2).toString();
+					if (isPandigital(panTest)) {
+						console.log(panTest);
+					}
+				}
+			}
+		`}
+        </code>
+      </pre>
+    );
     return (
       <div id="card-columns">
         <CardColumns>
@@ -253,12 +297,12 @@ class CardGroup extends Component {
             difficulty="5%"
           />
           <ProblemCard
-            title="Prime Factorization"
-            text="What is the minimum number of tries it takes to factor a given number?"
+            title="Pandigital Multiples"
+            text="Find the largest pandigital number formed from a concatenated product of an integer"
             onClick={(i, e, o) => this.handleClick(i, e, o)}
-            problem={this.quadraticPrimesProblem}
-            solution={this.quadraticPrimesSolution}
-            problemNumber="27"
+            problem={this.pandigitalMultiplesProblem}
+            solution={this.pandigitalMultiplesSolution}
+            problemNumber="38"
             difficulty="5%"
           />
         </CardColumns>
