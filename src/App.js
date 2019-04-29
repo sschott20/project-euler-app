@@ -27,7 +27,8 @@ class App extends Component {
       cards: !prevState.cards,
       displayTitle: title,
       displayProblem: problem,
-      displaySolution: solution
+      displaySolution: solution,
+      showProblem: true
     }));
   }
   showGallery() {
