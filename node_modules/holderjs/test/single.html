@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title>Holder Testing</title>
+<meta charset="utf-8">
+<style>
+  body {background: #fff; font-family:Arial,sans-serif;margin:0 auto;min-width:1080px}
+  .thumb {width:300px;height:250px;margin:25px;float:left}
+  .thumb img, .thumb .holderjs, .thumb object {display:block;margin:0 auto}
+  .thumb .caption {padding:10px;text-align:center;margin-top:10px}
+  .thumb.fullpage {float:none;clear:both;width:auto;height:100px;margin:25px}
+</style>
+</head>
+<body>
+<div class="thumb">
+  <img data-src="holder.js/300x200?bg=EE403D&fg=FFFFFF&text=Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+  <div class="caption">
+     Placeholder with lengthy text
+  </div>
+</div>
+
+<div class="thumb">
+  <img data-src="holder.js/300x200/#EE403D:#FFFFFF/text:Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+  <div class="caption">
+     Placeholder with lengthy text (legacy)
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- <script src="../holder.js"></script> -->
+<script src="renderperf/releases/holder-2.5.0/holder.js"></script>
+</body>
+</html>
