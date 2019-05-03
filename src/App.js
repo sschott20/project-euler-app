@@ -32,6 +32,7 @@ class App extends Component {
     }));
   }
   showGallery() {
+    // eslint-disable-next-line
     this.state = {
       cards: true
     };
